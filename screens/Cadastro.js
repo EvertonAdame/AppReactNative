@@ -1,12 +1,7 @@
 import React, { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
-import {
-  TextInput,
-  TouchableOpacity,
-  View,
-  Alert,
-} from "react-native";
-import { Text } from 'react-native-elements';
+import { TextInput, TouchableOpacity, View, Alert } from "react-native";
+import { Text } from "react-native-elements";
 import { TextInputMask } from "react-native-masked-text";
 import { Ionicons } from "@expo/vector-icons";
 import usuarioService from "../services/UsuarioService";
@@ -101,7 +96,16 @@ export default function Cadastro({ navigation }) {
       end={{ x: 0.3, y: 0.4 }}
       style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
     >
-    <Text style={{color: 'white', fontSize: 30, fontWeight: 'bold', marginBottom: 20}}>Cadastro</Text>
+      <Text
+        style={{
+          color: "white",
+          fontSize: 30,
+          fontWeight: "bold",
+          marginBottom: 20,
+        }}
+      >
+        Cadastro
+      </Text>
       <LinearGradient
         colors={["rgba(45, 1, 58, 1)", "rgb(83, 1, 94) 0,"]}
         end={{ x: 0.8, y: 0.9 }}
@@ -149,7 +153,7 @@ export default function Cadastro({ navigation }) {
           keyboardType="email-address"
           returnKeyType="done"
           style={{ marginLeft: 20 }}
-           color="#fff"
+          color="#fff"
         />
       </LinearGradient>
       <Text>{errorNome}</Text>
@@ -164,7 +168,6 @@ export default function Cadastro({ navigation }) {
           height: 50,
           justifyContent: "center",
         }}
-        
       >
         <View>
           <TextInputMask
@@ -183,14 +186,14 @@ export default function Cadastro({ navigation }) {
             errorMessage={errorTelefone}
             ref={(ref) => (telefoneField = ref)}
             style={{ marginLeft: 20 }}
-             color="#fff"
+            color="#fff"
           />
         </View>
       </LinearGradient>
       <Text>{errorTelefone}</Text>
 
       <LinearGradient
-        colors={["rgba(45, 1, 58, 1)", "rgb(83, 1, 94) 0,"]}
+        colors={["rgba(45, 1, 58, 2)", "rgb(83, 1, 94) 0,"]}
         end={{ x: 0.8, y: 0.9 }}
         style={{
           width: "85%",
@@ -219,7 +222,7 @@ export default function Cadastro({ navigation }) {
             onChangeText={(value) => setSenha(value)}
             secureTextEntry={hidePasss}
             style={{ width: "90%" }}
-             color="#fff"
+            color="#fff"
           />
           <TouchableOpacity onPress={() => setHidePasss(!hidePasss)}>
             {hidePasss ? (
@@ -242,11 +245,14 @@ export default function Cadastro({ navigation }) {
           marginTop: 50,
         }}
       >
-        <ButtonConfirmar onPress={() => salvar()} style={{width: "100%"}}>
-          <ButtonConfirmarCadastroText style={{width: "100%", textAlign: "center"}}>Cadastrar</ButtonConfirmarCadastroText>
+        <ButtonConfirmar onPress={() => salvar()} style={{ width: "100%" }}>
+          <ButtonConfirmarCadastroText
+            style={{ width: "100%", textAlign: "center" }}
+          >
+            Cadastrar
+          </ButtonConfirmarCadastroText>
         </ButtonConfirmar>
       </LinearGradient>
-
 
       <LinearGradient
         colors={["rgb(83, 1, 64) 0,", "rgba(45, 1, 58, 0.1)"]}
@@ -259,8 +265,15 @@ export default function Cadastro({ navigation }) {
           marginTop: 20,
         }}
       >
-          <ButtonConfirmar onPress={() => navigation.navigate('Entrar')} style={{width: "100%"}} >
-          <ButtonConfirmarCadastroText style={{width: "100%", textAlign: "center"}}>Voltar</ButtonConfirmarCadastroText>
+        <ButtonConfirmar
+          onPress={() => navigation.navigate("Entrar")}
+          style={{ width: "100%" }}
+        >
+          <ButtonConfirmarCadastroText
+            style={{ width: "100%", textAlign: "center" }}
+          >
+            Voltar
+          </ButtonConfirmarCadastroText>
         </ButtonConfirmar>
       </LinearGradient>
     </LinearGradient>

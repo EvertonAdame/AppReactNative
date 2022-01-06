@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { Text } from "react-native-elements";
-import CustomName from "./CustomName";
+import CustomHeader from "./CustomHeader";
 import { ContainerDrawer } from "./CustomDrawerStyles";
-import CustomEmail from "./CustomEmail";
-import Logout from './Logout';
+import CustomBody from "./CustomBody";
+import Logout from "./Logout";
 
 const CustomDrawer = () => {
   return (
-    <ContainerDrawer>
-       <CustomName/>
-       <CustomEmail />
-      <Logout />
-    </ContainerDrawer>
+    <>
+      <CustomHeader />
+      <ContainerDrawer>
+        <CustomBody />
+        <Logout />
+      </ContainerDrawer>
+    </>
   );
 };
 

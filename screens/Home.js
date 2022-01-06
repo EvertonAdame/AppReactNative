@@ -22,7 +22,8 @@ import {
   DetailsButton,
   CardHeader,
 } from "../styles/screens/Home";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
+import Logo from "../assets/teste.png";
 
 const Home = ({ navigation }) => {
   const { data, isFetching } = useGetExchangesQuery();
@@ -67,22 +68,18 @@ const Home = ({ navigation }) => {
                   </CardCryptoName>
                   <DetailsButton
                     onPress={() => {
-                      navigation.navigate("Details", {
+                      navigation.navigate("Detalhes", {
                         coinId: currency.id,
                       });
                     }}
                   >
-                    <MaterialCommunityIcons
-                      name="vector-polyline"
-                      size={34}
-                      color="purple"
-                    />
+                    <AntDesign name="doubleright" size={30} color="white" />
                   </DetailsButton>
                 </CardHeader>
                 <CardBox>
                   <LinearGradient
                     colors={["rgb(197, 132, 254) 0,", "transparent"]}
-                    end={{ x: 0.2, y: 0.4 }}
+                    end={{ x: 0.1, y: 0.2 }}
                     style={{ borderRadius: 20 }}
                   >
                     <CardInfo>
@@ -104,7 +101,7 @@ const Home = ({ navigation }) => {
                   </LinearGradient>
                   <ImageWrapper>
                     <Image
-                      source={{ uri: currency.iconUrl }}
+                      source={{uri: currency.iconUrl}}
                       style={{ width: 85, height: 85 }}
                     />
                   </ImageWrapper>
