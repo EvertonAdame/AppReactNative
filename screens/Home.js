@@ -24,6 +24,7 @@ import {
 } from "../styles/screens/Home";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import Logo from "../assets/teste.png";
+import NavBar from '../components/NavBar';
 
 const Home = ({ navigation }) => {
   const { data, isFetching } = useGetExchangesQuery();
@@ -57,6 +58,7 @@ const Home = ({ navigation }) => {
         style={{ flex: 1 }}
       >
         <ScrollView style={{ paddingTop: 20 }}>
+             <NavBar />
           {cryptos?.map((currency) => (
             <Container key={currency.id}>
               <CardContent>

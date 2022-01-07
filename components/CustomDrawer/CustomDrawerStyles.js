@@ -19,6 +19,7 @@ export const ButtonContainer = styled.TouchableOpacity`
 export const LogoutText = styled.Text`
   padding: 15px;
   width: 100%;
+  margin-bottom: 10px;
   font-weight: bold;  
   color: #FFF;
   text-align: center;

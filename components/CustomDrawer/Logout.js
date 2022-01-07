@@ -22,7 +22,7 @@ const Logout = () => {
   return (
 
         <LinearGradient
-        colors={["rgb(83, 1, 64) 0,", "rgba(45, 1, 58, 0.4)"]}
+        colors={["rgb(83, 1, 94) 0,", "rgba(45, 1, 58, 0.4)"]}
         end={{ x: 0.8, y: 0.9 }}
         style={{ position: "absolute", bottom: 20, width: "90%",
         alignItems: "center", 

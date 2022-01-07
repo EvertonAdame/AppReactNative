@@ -13,9 +13,10 @@ const Logado = () => {
     <Drawer.Navigator
       initialRouteName="Home"
       drawerContent={CustomDrawer}
-
+      
       screenOptions={{
-        
+        headerShown: false,
+          drawerType: 'back',
         headerStyle:{
           backgroundColor: '#000',
           height: 120,

@@ -43,6 +43,7 @@ import {
 import * as Linking from "expo-linking";
 import { Modal } from "react-native";
 import { Picker } from "@react-native-picker/picker";
+import BackDetailsButton from '../components/BackDetailsButton';
 
 const CryptoDetails = ({ route, navigation }) => {
   const [timePeriod, setTimePeriod] = useState("7d");
@@ -147,6 +148,7 @@ const CryptoDetails = ({ route, navigation }) => {
       style={{ flex: 1 }}
     >
       <DetailsContainer>
+      <BackDetailsButton/>
         <DetailsTitleTop>
           Tabela de preços <DetailsName>{cryptoDetails?.name}</DetailsName>
         </DetailsTitleTop>
