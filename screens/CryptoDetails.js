@@ -43,30 +43,28 @@ import {
 import * as Linking from "expo-linking";
 import { Modal } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import BackDetailsButton from '../components/BackDetailsButton';
+import BackDetailsButton from "../components/BackDetailsButton";
+import Sparkline from "react-native-sparkline";
 
 const CryptoDetails = ({ route, navigation }) => {
-  const [timePeriod, setTimePeriod] = useState("7d");
+  const [timePeriod, setTimePeriod] = useState("24h");
   const [visible, setVisible] = useState(false);
-  const { coinId } = route.params;
+  const { uuid, name } = route.params;
   const { data: coinHistory } = useGetCryptoHistoryQuery({
-    coinId,
+    uuid,
     timePeriod,
   });
-  const { data, isFetching } = useGetCryptoDetailsQuery(coinId);
 
-  const time = [
-    "3 Horas",
-    "24 Horas",
-    "7 Dias",
-    "30 Dias",
-    "3 Meses",
-    "1 Ano",
-    "3 Anos",
-    "5 Anos",
-  ];
+  console.log(name)
+
+  const { data, isFetching } = useGetCryptoDetailsQuery(uuid);
+
+  const time = ["3h", "24h", "7d", "30d", "3m", "1y", "3y", "5y"];
 
   const cryptoDetails = data?.data?.coin;
+
+  console.log(cryptoDetails);
+  
   if (isFetching)
     return (
       <LinearGradient
@@ -89,11 +87,11 @@ const CryptoDetails = ({ route, navigation }) => {
       value: cryptoDetails.rank,
       icon: <AntDesign name="trademark" size={24} color="white" />,
     },
-    {
-      title: "Volume (24hr)",
-      value: `$ ${cryptoDetails.volume && millify(cryptoDetails.volume)}`,
-      icon: <Entypo name="bookmarks" size={24} color="white" />,
-    },
+    // {
+    //   title: "Volume (24hr)",
+    //   value: `$ ${cryptoDetails.volume && millify(cryptoDetails.volume)}`,
+    //   icon: <Entypo name="bookmarks" size={24} color="white" />,
+    // },
     {
       title: "Capitalização de Mercado",
       value: `$ ${cryptoDetails.marketCap && millify(cryptoDetails.marketCap)}`,
@@ -118,7 +116,7 @@ const CryptoDetails = ({ route, navigation }) => {
     },
     {
       title: "Aprovado para circulação",
-      value: cryptoDetails.approvedSupply ? (
+      value: cryptoDetails.supply.confirmed ? (
         <AntDesign name="check" size={24} color="white" />
       ) : (
         <AntDesign name="frowno" size={24} color="white" />
@@ -127,19 +125,21 @@ const CryptoDetails = ({ route, navigation }) => {
     },
     {
       title: "Fornecimento total",
-      value: `$ ${millify(cryptoDetails.totalSupply)}`,
+      value: `$ ${millify(cryptoDetails.supply.total)}`,
       icon: <MaterialIcons name="stacked-bar-chart" size={24} color="white" />,
     },
     {
       title: "Moedas em circulação",
-      value: `$ ${millify(cryptoDetails.circulatingSupply)}`,
+      value: `$ ${millify(cryptoDetails.supply.circulating)}`,
       icon: <FontAwesome5 name="coins" size={24} color="white" />,
     },
   ];
-
+  const dato = Array.from({ length: 20 }).map(
+    (unused, i) => i + (i + 1) * Math.random()
+  );
   const closeModal = (value) => {
-    setTimePeriod(value);
     setVisible(false);
+    setTimePeriod(value);
   };
   return (
     <LinearGradient
@@ -148,50 +148,61 @@ const CryptoDetails = ({ route, navigation }) => {
       style={{ flex: 1 }}
     >
       <DetailsContainer>
-      <BackDetailsButton/>
         <DetailsTitleTop>
           Tabela de preços <DetailsName>{cryptoDetails?.name}</DetailsName>
         </DetailsTitleTop>
         <DestailsP>Preço em dollar.</DestailsP>
         <DetailsHeader>
-          <DetailsTitle>Slug: ({cryptoDetails?.slug})</DetailsTitle>
+          <Sparkline data={cryptoDetails.sparkline}>
+            <Sparkline.Fill />
+          </Sparkline>
         </DetailsHeader>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', padding: 20, alignItems: 'center', height: 100}}>
-        <TouchableOpacity
+        <View
           style={{
-            borderRadius: 10,
-            color: "#fff",
-            alignItems: "center",
             flexDirection: "row",
-            justifyContent: "center",
-       
-            width: '32%',
-            backgroundColor: "rgb(83, 1, 94)",
-            padding: 10,
-
+            justifyContent: "space-between",
+            padding: 20,
+            alignItems: "center",
+            height: 100,
           }}
-          onPress={() => setVisible(true)}
         >
-          
-            <Text
+          <TouchableOpacity
             style={{
+              borderRadius: 10,
               color: "#fff",
-              marginRight: 20,
-              fontSize: 16,
-              marginRight: 7,
+              alignItems: "center",
+              flexDirection: "row",
+              justifyContent: "center",
+
+              width: "32%",
+              backgroundColor: "rgb(83, 1, 94)",
+              padding: 10,
             }}
+            onPress={() => setVisible(true)}
           >
-            {timePeriod} 
-          </Text>
-          <Fontisto name="date" size={24} color="white" />
-        </TouchableOpacity>
-        <View style={{ flexDirection: 'row'}}>
-        <Entypo name="arrow-bold-left" size={24} color="white"  style={{ marginRight: 10}}/>
-        <Text style={{ color: "#fff", fontSize: 15, textAlign: "center" }}>
-         Alterar gráfico
-        </Text>
-      
-        </View>
+            <Text
+              style={{
+                color: "#fff",
+                marginRight: 20,
+                fontSize: 16,
+                marginRight: 7,
+              }}
+            >
+              {timePeriod}
+            </Text>
+            <Fontisto name="date" size={24} color="white" />
+          </TouchableOpacity>
+          <View style={{ flexDirection: "row" }}>
+            <Entypo
+              name="arrow-bold-left"
+              size={24}
+              color="white"
+              style={{ marginRight: 10 }}
+            />
+            <Text style={{ color: "#fff", fontSize: 15, textAlign: "center" }}>
+              Alterar gráfico
+            </Text>
+          </View>
         </View>
         <Modal animated transparent animationType="slide" visible={visible}>
           <View
@@ -229,8 +240,7 @@ const CryptoDetails = ({ route, navigation }) => {
               </View>
               <Picker
                 mode="dropdown"
-              
-                style={{ marginLeft: 20, marginTop: 20, width: '90%' }}
+                style={{ marginLeft: 20, marginTop: 20, width: "90%" }}
                 dropdownIconColor="purple"
                 supportedOrientations={["portrait", "landscape"]}
                 selectedValue={timePeriod}
@@ -247,19 +257,18 @@ const CryptoDetails = ({ route, navigation }) => {
         <LineChartContainer>
           <LineChartInfo
             coinHistory={coinHistory}
-            currentPrice={millify(cryptoDetails.price)}
-            coinName={cryptoDetails.name}
+            currentPrice={millify(cryptoDetails?.price)}
+            coinName={cryptoDetails?.name}
           />
         </LineChartContainer>
         <View className="coin-value=statistics-heading">
           <DetailsTittleChart>
-            Estatísticas {cryptoDetails.name}
+            Estatísticas {cryptoDetails?.name}
           </DetailsTittleChart>
         </View>
 
-        {stats.map(({ icon, title, value, id }) => (
+        {stats.map(({ icon, title, value }) => (
           <DetailStats
-            key={id}
             style={{ borderBottomColor: "purple", borderBottomWidth: 2 }}
           >
             <DetailStatsIcon>
@@ -273,10 +282,9 @@ const CryptoDetails = ({ route, navigation }) => {
           Outras Estatísticas {cryptoDetails?.name}
         </DetailsTittleChart>
 
-        {genericStats.map(({ icon, title, value, id }) => (
+        {genericStats.map(({ icon, title, value }) => (
           <DetailStats
             style={{ borderBottomColor: "purple", borderBottomWidth: 2 }}
-            key={id}
           >
             <DetailStatsIcon>
               <IconStats>{icon}</IconStats>
@@ -289,15 +297,15 @@ const CryptoDetails = ({ route, navigation }) => {
           Links relacionados ao {cryptoDetails?.name}
         </DetailsTittleChart>
         <View>
-          {cryptoDetails.links.map((link) => (
+          {cryptoDetails?.links.map((link) => (
             <LinksContainer
               className="coin-link"
-              key={link.name}
+              key={link?.name}
               style={{ border: "grey", borderBottomWidth: 1 }}
             >
-              <LinksUrl>{link.type}</LinksUrl>
+              <LinksUrl>{link?.type}</LinksUrl>
               <LinksUrl onPress={() => Linking.openURL(link.url)}>
-                <LinkLink>{link.name}</LinkLink>
+                <LinkLink>{link?.name}</LinkLink>
               </LinksUrl>
             </LinksContainer>
           ))}

@@ -14,7 +14,7 @@ const NavBar = () => {
   }, [navigation])
 
   return (
-    <View style={{width: '100%', height: 40, alignContent: 'center', paddingTop: 30, paddingLeft: 8, paddingBottom: 10}}>
+    <View style={{width: '100%', height: 40, alignContent: 'center', paddingTop: 30, paddingLeft: 8, paddingBottom: 10,}}>
       <Ionicons name="menu" size={38} color="white" onPress={handlePressMenuButton} />
     </View>
   )

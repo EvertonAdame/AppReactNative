@@ -6,6 +6,7 @@ import Teste from "../../assets/teste.png";
 import BackButton from "../BackButton";
 import { Fontisto } from '@expo/vector-icons'; 
 
+
 const CustomHeader = () => {
   const [nome, setNome] = useState("");
 

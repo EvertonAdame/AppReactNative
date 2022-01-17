@@ -17,6 +17,7 @@ import {
 const LineChartInfo = ({ coinHistory, currentPrice, coinName }) => {
   const coinPrice = [];
   const coinTimestamp = [];
+ 
 
   for (let i = 0; i < coinHistory?.data?.history?.length; i += 1) {
     coinPrice.push(coinHistory?.data?.history[i].price);
@@ -42,7 +43,7 @@ const LineChartInfo = ({ coinHistory, currentPrice, coinName }) => {
       <View>
         <LineChartTitle>
           <LineChartDetails>
-            Mudança: {coinHistory?.data?.change}%
+            Mudança em tempo real: {coinHistory?.data?.change}%
           </LineChartDetails>
           <LineChartDetails>Preço atual: $ {currentPrice}</LineChartDetails>
         </LineChartTitle>

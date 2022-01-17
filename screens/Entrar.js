@@ -68,7 +68,7 @@ return (
             style={{flex:1}}
     >
     <CaixaAzul>
-        <LoginText>FullEthe</LoginText>
+        <LoginText>FullCrypto</LoginText>
         <ContainerInputForgot>
          <LinearGradient
         colors={['rgba(45, 1, 58, 1)', 'rgb(83, 1, 94) 0,' ]}

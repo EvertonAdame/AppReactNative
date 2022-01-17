@@ -12,13 +12,15 @@ const StackNavigation = () => {
 
 
     return (
+      
           <Stack.Navigator initialRouteName="Preload" screenOptions={{headerShown: false}}>
             <Stack.Screen name="Preload" component={Preload} />
             <Stack.Screen name="Entrar" component={Entrar} />
             <Stack.Screen name="Cadastro" component={Cadastro} />
             <Stack.Screen name="Logado" component={Logado} />
           </Stack.Navigator>
-    )
+          
+    ) 
 
 
 

@@ -21,16 +21,23 @@ import {
   TextNumbers,
   DetailsButton,
   CardHeader,
-} from "../styles/screens/Home";
+  ScrollContainer
+} from "../styles/screens/CryptosList";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import Logo from "../assets/teste.png";
-import NavBar from '../components/NavBar';
+import NavBar from "../components/NavBar";
+import axios from "axios";
+import { useNavigation } from '@react-navigation/native'
 
-const Home = ({ navigation }) => {
-  const { data, isFetching } = useGetExchangesQuery();
-  const { data: cryptosList } = useGetCryptosQuery();
+
+
+const CryptosList = ({ simplified }) => {
+  const count = simplified ? 10 : 100;
+  const { data: cryptosList, isFetching } = useGetCryptosQuery(count);
   const [cryptos, setCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  
+  const navigation = useNavigation();
 
   useEffect(() => {
     const filteredData = cryptosList?.data?.coins.filter((coin) =>
@@ -57,10 +64,18 @@ const Home = ({ navigation }) => {
         end={{ x: 0.3, y: 0.4 }}
         style={{ flex: 1 }}
       >
-        <ScrollView style={{ paddingTop: 20 }}>
-             <NavBar />
+        <ScrollContainer>
+          {!simplified && (
+            <Input 
+              placeholder="Procurar moeda"
+              onChangeText={(value) => setSearchTerm(value)}
+              style={{color: 'white', marginTop: 5}}
+              labelStyle={{color: 'white'}}
+              rightIcon={<AntDesign name="search1" size={24} color="white" />}
+            />
+          )}
           {cryptos?.map((currency) => (
-            <Container key={currency.id}>
+            <Container key={currency.uuid}>
               <CardContent>
                 <CardHeader>
                   <CardCryptoName>
@@ -71,7 +86,8 @@ const Home = ({ navigation }) => {
                   <DetailsButton
                     onPress={() => {
                       navigation.navigate("Detalhes", {
-                        coinId: currency.id,
+                        uuid: currency.uuid,
+                        name: currency.name
                       });
                     }}
                   >
@@ -103,7 +119,7 @@ const Home = ({ navigation }) => {
                   </LinearGradient>
                   <ImageWrapper>
                     <Image
-                      source={{uri: currency.iconUrl}}
+                      source={{ uri: currency.iconUrl }}
                       style={{ width: 85, height: 85 }}
                     />
                   </ImageWrapper>
@@ -111,10 +127,10 @@ const Home = ({ navigation }) => {
               </CardContent>
             </Container>
           ))}
-        </ScrollView>
+        </ScrollContainer>
       </LinearGradient>
     </>
   );
 };
 
-export default Home;
+export default CryptosList;

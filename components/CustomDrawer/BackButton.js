@@ -11,7 +11,7 @@ const navigation = useNavigation();
 
     <View style={{marginRight: 20}}>
      
-      <Ionicons name="md-arrow-back-circle-sharp" size={32} color="#a403ff" onPress={() => navigation.navigate('Home')} />
+      <Ionicons name="arrow-back-sharp" size={24} color="#a403ff" onPress={() => navigation.navigate('Home')} />
     </View>
     )
 }

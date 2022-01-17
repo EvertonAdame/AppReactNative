@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 
 export const DetailsContainer = styled.ScrollView`
-    padding-top: 50px;
+
 
 `
 export const DetailsHeader = styled.View`
