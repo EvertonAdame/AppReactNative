@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { ScrollView, Image } from "react-native";
+import { ScrollView } from "react-native";
 import { Button, CheckBox, Input, Text } from "react-native-elements";
 import {
   useGetExchangesQuery,
@@ -21,22 +21,20 @@ import {
   TextNumbers,
   DetailsButton,
   CardHeader,
-  ScrollContainer
+  ScrollContainer,
 } from "../styles/screens/CryptosList";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
 import Logo from "../assets/teste.png";
 import NavBar from "../components/NavBar";
-import axios from "axios";
-import { useNavigation } from '@react-navigation/native'
-
-
+import { useNavigation } from "@react-navigation/native";
+import Image from "react-native-remote-svg";
 
 const CryptosList = ({ simplified }) => {
   const count = simplified ? 10 : 100;
   const { data: cryptosList, isFetching } = useGetCryptosQuery(count);
   const [cryptos, setCryptos] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
-  
+
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -66,11 +64,11 @@ const CryptosList = ({ simplified }) => {
       >
         <ScrollContainer>
           {!simplified && (
-            <Input 
+            <Input
               placeholder="Procurar moeda"
               onChangeText={(value) => setSearchTerm(value)}
-              style={{color: 'white', marginTop: 5}}
-              labelStyle={{color: 'white'}}
+              style={{ color: "white", marginTop: 5 }}
+              labelStyle={{ color: "white" }}
               rightIcon={<AntDesign name="search1" size={24} color="white" />}
             />
           )}
@@ -87,7 +85,7 @@ const CryptosList = ({ simplified }) => {
                     onPress={() => {
                       navigation.navigate("Detalhes", {
                         uuid: currency.uuid,
-                        name: currency.name
+                        name: currency.name,
                       });
                     }}
                   >
@@ -102,12 +100,12 @@ const CryptosList = ({ simplified }) => {
                   >
                     <CardInfo>
                       <TextCard>
-                        Preço:{" "}
+                        Preço:
                         <TextNumbers>{millify(currency.price)}</TextNumbers>
                       </TextCard>
 
                       <TextCard>
-                        CAP de mercado:{" "}
+                        CAP de mercado:
                         <TextNumbers>{millify(currency.marketCap)}</TextNumbers>
                       </TextCard>
 
@@ -120,7 +118,7 @@ const CryptosList = ({ simplified }) => {
                   <ImageWrapper>
                     <Image
                       source={{ uri: currency.iconUrl }}
-                      style={{ width: 85, height: 85 }}
+                      style={{ width: 100, height: 100 }}
                     />
                   </ImageWrapper>
                 </CardBox>

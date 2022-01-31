@@ -13,6 +13,7 @@ import {
   ButtonConfirmarCadastroText,
   SignMessageButtonTextBold,
   SignMessageButton,
+  TextError
 } from "../styles/screens/Cadastro";
 
 export default function Cadastro({ navigation }) {
@@ -25,7 +26,6 @@ export default function Cadastro({ navigation }) {
   const [errorTelefone, setErrorTelefone] = useState(null);
   const [errorSenha, setErrorSenha] = useState(null);
   const [hidePasss, setHidePasss] = useState(true);
-  const [hidePassss, setHidePassss] = useState(true);
   const [isLoading, setLoading] = useState(false);
 
   const handleMessageButtonClick = () => {
@@ -90,6 +90,8 @@ export default function Cadastro({ navigation }) {
     }
   };
 
+ 
+
   return (
     <LinearGradient
       colors={["rgb(83, 1, 94) 0,", "hsla(253,16%,7%,1) 0"]}
@@ -130,7 +132,7 @@ export default function Cadastro({ navigation }) {
           color="#fff"
         />
       </LinearGradient>
-      <Text>{errorEmail}</Text>
+      <TextError>{errorEmail}</TextError>
 
       <LinearGradient
         colors={["rgba(45, 1, 58, 1)", "rgb(83, 1, 94) 0,"]}
@@ -150,13 +152,13 @@ export default function Cadastro({ navigation }) {
             setNome(value);
             setErrorNome(null);
           }}
-          keyboardType="email-address"
+          keyboardType="default"
           returnKeyType="done"
           style={{ marginLeft: 20 }}
           color="#fff"
         />
       </LinearGradient>
-      <Text>{errorNome}</Text>
+      <TextError>{errorNome}</TextError>
 
       <LinearGradient
         colors={["rgba(45, 1, 58, 1)", "rgb(83, 1, 94) 0,"]}
@@ -183,14 +185,13 @@ export default function Cadastro({ navigation }) {
             onChangeText={(value) => setTelefone(value)}
             keyboardType="phone-pad"
             returnKeyType="done"
-            errorMessage={errorTelefone}
             ref={(ref) => (telefoneField = ref)}
             style={{ marginLeft: 20 }}
             color="#fff"
           />
         </View>
       </LinearGradient>
-      <Text>{errorTelefone}</Text>
+      <TextError>{errorTelefone}</TextError>
 
       <LinearGradient
         colors={["rgba(45, 1, 58, 2)", "rgb(83, 1, 94) 0,"]}

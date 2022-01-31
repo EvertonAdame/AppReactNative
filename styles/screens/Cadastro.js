@@ -51,3 +51,7 @@ export const ButtonConfirmarCadastroText = styled.Text`
 
 `;
 
+export const TextError = styled.Text`
+  color: red;
+
+`

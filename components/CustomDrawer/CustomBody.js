@@ -18,9 +18,7 @@ const CustomBody = () => {
   return (
     <View style={{marginLeft: 5}}>
  
-        <Text style={{fontSize: 20, color: 'white', alignItems: 'center', marginBottom: 30}} onPress={() => navigation.navigate('Acompanhamento')} >
-        <MaterialCommunityIcons name="note-multiple-outline" size={34} color="white" /> <Text style={{ color: 'white' }}>Tracker</Text>
-      </Text>
+     
        
     </View>
   );

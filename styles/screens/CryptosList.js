@@ -13,7 +13,7 @@ export const CardContent = styled.View`
   flex: 1;
   min-height: 250px;
   padding: 10px;
-  background-color: rgba(0, 4, 28, 0.91);
+  background-color: rgba(0, 4, 28, 1);
 `;
 
 export const ScrollContainer = styled.ScrollView`
@@ -29,20 +29,21 @@ export const CardInfo = styled.View`
 `;
 
 export const ImageWrapper = styled.View`
-  height: 100px;
-  width: 100px;
+  height: 120px;
+  width: 120px;
   background-color: #fff;
-  border-radius: 50px;
+  border-radius: 10px;
   margin-right: 20px;
   justify-content: center;
   align-items: center;
 `;
 
 export const TextCard = styled.Text`
-  margin-right: 5px;
+ 
   margin-top: 8px;
   color: #fff;
   font-size: 16px;
+
 `;
 
 export const TextTitile = styled.Text`
@@ -65,6 +66,7 @@ export const TextNumbers = styled.Text`
   color: purple;
   font-weight: bold;
   font-family: monospace;
+  font-size: 16px;
 `;
 
 export const DetailsButton = styled.TouchableOpacity``;

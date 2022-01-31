@@ -28,8 +28,8 @@ const CustomHeader = () => {
         <View style={{ flexDirection: "row", width: "100%" }}>
           <Image
             style={{
-              width: 100,
-              height: 100,
+              width: 80,
+              height: 80,
               borderRadius: 50,
               marginLeft: 10,
               marginTop: 50,
@@ -48,7 +48,7 @@ const CustomHeader = () => {
             marginBottom: 10,
           }}
         >
-          {nome}<Fontisto name="heart" size={18} color="red" />
+          {nome} 
         </Text>
       </View>
     </>

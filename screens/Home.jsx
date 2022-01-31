@@ -29,6 +29,7 @@ const Home = ({ navigation }) => {
   const { data: statsData } = useGetCryptosStatsQuery();
 
 
+  const dataTotal = statsData?.data;
 
   if (isFetching)
     return (
@@ -41,10 +42,11 @@ const Home = ({ navigation }) => {
       </LinearGradient>
     );
 
+
   return (
     <>
       <LinearGradient
-        colors={["rgb(83, 1, 94) 0,", "rgb(83, 1, 94) 0,"]}
+        colors={["rgb(19, 1, 26) 0,", "rgb(83, 1, 94) 0,"]}
         end={{ x: 0.3, y: 0.4 }}
         style={{ flex: 1 }}
       >
@@ -56,7 +58,7 @@ const Home = ({ navigation }) => {
               Total de criptomoedas 
             </TextInfo>
             <TextInfoColored>
-              {millify(statsData?.data?.totalCoins)}
+              {dataTotal?.totalCoins}
             </TextInfoColored>
             </InfoContainer>
             <InfoContainer>
@@ -64,31 +66,31 @@ const Home = ({ navigation }) => {
               Valor total de mercado
             </TextInfo>
             <TextInfoColored>
-              {millify(statsData?.data?.totalMarketCap)}
+              {millify(dataTotal?.totalMarketCap)}
             </TextInfoColored>
             </InfoContainer>
              <InfoContainer>
             <TextInfo>
-              Total de mercado
+              Total de mercados
             </TextInfo>
             <TextInfoColored>
-              {millify(statsData?.data?.totalMarkets)}
+              {millify(dataTotal?.totalMarkets)}
             </TextInfoColored>
             </InfoContainer>
-            <InfoContainer>
+            {/* <InfoContainer>
             <TextInfo>
               Total Exchanges
             </TextInfo>
             <TextInfoColored>
-              {millify(statsData?.data?.totalExchanges)}
+              {millify(statsData?.data.totalExchanges)}
             </TextInfoColored>
-            </InfoContainer>
+            </InfoContainer> */}
                <InfoContainer>
             <TextInfo>
             Volume total 24h 
             </TextInfo>
             <TextInfoColored>
-              {millify(statsData?.data?.total24hVolume)}
+              {millify(dataTotal.total24hVolume)}
             </TextInfoColored>
             </InfoContainer>
           </StatsContainer>

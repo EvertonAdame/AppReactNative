@@ -47,12 +47,18 @@ export const PickerWrapper = styled.View`
 
 `;
 
-export const DetailsTitleTop = styled.Text`
+export const DetailsTitleTop = styled.View`
     margin-top: 30px;
-    font-weight: bold;
-    font-size: 22px;
-    color: #FFF;
-    text-align: center;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    margin-bottom: 10px;
+
+
+`
+
+export const ImageWrapper = styled.View`
+    margin-left: 10px;
 
 `
 export const DetailsTittleChart = styled.Text`

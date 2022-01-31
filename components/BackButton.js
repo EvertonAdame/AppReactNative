@@ -15,7 +15,7 @@ const navigation = useNavigation();
 
   return (
     <View style={{width: '100%', height: 40, alignContent: 'center',  paddingLeft: 90}}>
-     <Ionicons name="md-caret-back-circle-outline" size={38} color="white" onPress={handlePressBackButton}/>
+     <Ionicons name="md-caret-back-circle-outline" size={38} color="#a403ff" onPress={handlePressBackButton}/>
     </View>
   )
 }

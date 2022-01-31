@@ -35,6 +35,21 @@ class UsuarioService{
         })
     }
     
+     async find(email){
+        return axios({
+            url: Config.API_URL + "usuario/listar",
+            method: "POST",
+            timeout: Config.TIMEOUT_REQUEST,
+            email: email,
+            headers: Config.HEADER_REQUEST
+        }).then((response) => {
+            return Promise.resolve(response)
+        }).catch((error) => {
+            return Promise.reject(error)
+        })
+    }
+    
+    
    
     async logarComToken(data){
         return axios({

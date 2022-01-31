@@ -4,11 +4,9 @@ import styled from 'styled-components/native';
 
 export const HomeTitle = styled.Text`
     color: white;
-    margin-top: 10px;
+    margin-top: 15px;
     text-align: center;
     font-size: 22px;
-    
-    
 `;
 
 
@@ -62,7 +60,7 @@ export const InfoContainer = styled.View`
 
 `
 export const TextInfoColored = styled.Text`
-    color: aqua;
+    color: yellow;
     font-weight: bold;
     font-size: 16px;
 

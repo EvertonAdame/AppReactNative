@@ -5,7 +5,6 @@ import CryptoDetails from "./CryptoDetails";
 import { Text } from "react-native-elements";
 import CustomDrawer from "../components/CustomDrawer/CustomDrawer";
 import BackButton from "../components/CustomDrawer/BackButton";
-import Tracker from "../components/Tracker";
 import CryptosList from "./CryptosList";
 
 const Drawer = createDrawerNavigator();
@@ -52,7 +51,7 @@ const Logado = () => {
       component={CryptoDetails}
    
        />
-      <Drawer.Screen name="Acompanhamento" component={Tracker} />
+   
 
       <Drawer.Screen name="coins"
       options={{ title: 'Criptomoedas',

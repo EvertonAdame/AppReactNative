@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, TouchableOpacity } from "react-native";
+import React, { useState, useRef, useEffect } from "react";
+import { View, TouchableOpacity  } from "react-native";
 import { Text } from "react-native-elements";
 import {
   useGetCryptoDetailsQuery,
@@ -24,6 +24,7 @@ import {
   LinksUrl,
   LinkLink,
   DetailsName,
+  ImageWrapper
 } from "../styles/screens/CryptoDetails";
 import LottieView from "lottie-react-native";
 import LoadingJson from "../assets/login.json";
@@ -45,6 +46,7 @@ import { Modal } from "react-native";
 import { Picker } from "@react-native-picker/picker";
 import BackDetailsButton from "../components/BackDetailsButton";
 import Sparkline from "react-native-sparkline";
+import Image from "react-native-remote-svg";
 
 const CryptoDetails = ({ route, navigation }) => {
   const [timePeriod, setTimePeriod] = useState("24h");
@@ -55,16 +57,12 @@ const CryptoDetails = ({ route, navigation }) => {
     timePeriod,
   });
 
-  console.log(name)
-
   const { data, isFetching } = useGetCryptoDetailsQuery(uuid);
 
   const time = ["3h", "24h", "7d", "30d", "3m", "1y", "3y", "5y"];
 
   const cryptoDetails = data?.data?.coin;
 
-  console.log(cryptoDetails);
-  
   if (isFetching)
     return (
       <LinearGradient
@@ -78,11 +76,13 @@ const CryptoDetails = ({ route, navigation }) => {
 
   const stats = [
     {
+      id: 1,
       title: "Preço em USD",
       value: `$ ${cryptoDetails.price && millify(cryptoDetails.price)}`,
       icon: <Feather name="dollar-sign" size={24} color="white" />,
     },
     {
+      id: 2,
       title: "Rank",
       value: cryptoDetails.rank,
       icon: <AntDesign name="trademark" size={24} color="white" />,
@@ -93,6 +93,7 @@ const CryptoDetails = ({ route, navigation }) => {
     //   icon: <Entypo name="bookmarks" size={24} color="white" />,
     // },
     {
+      id: 3,
       title: "Capitalização de Mercado",
       value: `$ ${cryptoDetails.marketCap && millify(cryptoDetails.marketCap)}`,
       icon: <Feather name="dollar-sign" size={24} color="white" />,
@@ -105,16 +106,19 @@ const CryptoDetails = ({ route, navigation }) => {
   ];
   const genericStats = [
     {
+      id: 1,
       title: "Número de mercado",
       value: cryptoDetails.numberOfMarkets,
       icon: <Feather name="dollar-sign" size={24} color="white" />,
     },
     {
+      id: 2,
       title: "Número de trocas",
       value: cryptoDetails.numberOfExchanges,
       icon: <FontAwesome name="trademark" size={24} color="white" />,
     },
     {
+      id: 3,
       title: "Aprovado para circulação",
       value: cryptoDetails.supply.confirmed ? (
         <AntDesign name="check" size={24} color="white" />
@@ -124,11 +128,13 @@ const CryptoDetails = ({ route, navigation }) => {
       icon: <Entypo name="circular-graph" size={24} color="white" />,
     },
     {
+      id: 4,
       title: "Fornecimento total",
       value: `$ ${millify(cryptoDetails.supply.total)}`,
       icon: <MaterialIcons name="stacked-bar-chart" size={24} color="white" />,
     },
     {
+      id: 5,
       title: "Moedas em circulação",
       value: `$ ${millify(cryptoDetails.supply.circulating)}`,
       icon: <FontAwesome5 name="coins" size={24} color="white" />,
@@ -141,6 +147,9 @@ const CryptoDetails = ({ route, navigation }) => {
     setVisible(false);
     setTimePeriod(value);
   };
+
+
+  
   return (
     <LinearGradient
       colors={["rgb(83, 1, 94) 0,", "hsla(253,16%,7%,1) 0"]}
@@ -148,12 +157,22 @@ const CryptoDetails = ({ route, navigation }) => {
       style={{ flex: 1 }}
     >
       <DetailsContainer>
+
         <DetailsTitleTop>
-          Tabela de preços <DetailsName>{cryptoDetails?.name}</DetailsName>
+          <DetailsName>{cryptoDetails?.name}</DetailsName>
+          <ImageWrapper>
+          <Image
+            source={{ uri: cryptoDetails?.iconUrl }}
+            style={{ width: 30, height: 30 }}
+          />
+          </ImageWrapper>
         </DetailsTitleTop>
+       
         <DestailsP>Preço em dollar.</DestailsP>
+       
+
         <DetailsHeader>
-          <Sparkline data={cryptoDetails.sparkline}>
+          <Sparkline data={cryptoDetails?.sparkline}>
             <Sparkline.Fill />
           </Sparkline>
         </DetailsHeader>
@@ -258,7 +277,7 @@ const CryptoDetails = ({ route, navigation }) => {
           <LineChartInfo
             coinHistory={coinHistory}
             currentPrice={millify(cryptoDetails?.price)}
-            coinName={cryptoDetails?.name}
+            timePeriod={timePeriod}
           />
         </LineChartContainer>
         <View className="coin-value=statistics-heading">
@@ -267,8 +286,9 @@ const CryptoDetails = ({ route, navigation }) => {
           </DetailsTittleChart>
         </View>
 
-        {stats.map(({ icon, title, value }) => (
+        {stats.map(({ icon, title, value, id }) => (
           <DetailStats
+            key={id}
             style={{ borderBottomColor: "purple", borderBottomWidth: 2 }}
           >
             <DetailStatsIcon>
@@ -282,8 +302,9 @@ const CryptoDetails = ({ route, navigation }) => {
           Outras Estatísticas {cryptoDetails?.name}
         </DetailsTittleChart>
 
-        {genericStats.map(({ icon, title, value }) => (
+        {genericStats.map(({ icon, title, value, id }) => (
           <DetailStats
+            key={id}
             style={{ borderBottomColor: "purple", borderBottomWidth: 2 }}
           >
             <DetailStatsIcon>
@@ -297,10 +318,10 @@ const CryptoDetails = ({ route, navigation }) => {
           Links relacionados ao {cryptoDetails?.name}
         </DetailsTittleChart>
         <View>
-          {cryptoDetails?.links.map((link) => (
+          {cryptoDetails?.links.map((link, index) => (
             <LinksContainer
               className="coin-link"
-              key={link?.name}
+              key={index}
               style={{ border: "grey", borderBottomWidth: 1 }}
             >
               <LinksUrl>{link?.type}</LinksUrl>

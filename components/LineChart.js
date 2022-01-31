@@ -14,7 +14,7 @@ import {
   LineChartDetails,
 } from "../styles/components/LineChart";
 
-const LineChartInfo = ({ coinHistory, currentPrice, coinName }) => {
+const LineChartInfo = ({ coinHistory, currentPrice, timePeriod }) => {
   const coinPrice = [];
   const coinTimestamp = [];
  
@@ -43,7 +43,7 @@ const LineChartInfo = ({ coinHistory, currentPrice, coinName }) => {
       <View>
         <LineChartTitle>
           <LineChartDetails>
-            Mudança em tempo real: {coinHistory?.data?.change}%
+            Mudança em {timePeriod} : {coinHistory?.data?.change}%
           </LineChartDetails>
           <LineChartDetails>Preço atual: $ {currentPrice}</LineChartDetails>
         </LineChartTitle>
